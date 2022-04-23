@@ -1,0 +1,26 @@
+{
+  "name": "10-team_profile_generator",
+  "version": "1.0.0",
+  "description": "\"Team Profile Generator\"",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CanRo2B/10-Team_Profile_Generator.git"
+  },
+  "author": "me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CanRo2B/10-Team_Profile_Generator/issues"
+  },
+  "homepage": "https://github.com/CanRo2B/10-Team_Profile_Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.2"
+  }
+}
