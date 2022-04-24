@@ -1,5 +1,4 @@
 // Require the employee from the lib folder
-const { number } = require("yargs");
 const Employee = require("../lib/employee");
 
 const e = new Employee("name", 522, "email@email.com")
