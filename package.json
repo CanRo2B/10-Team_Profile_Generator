@@ -1,14 +1,14 @@
 {
   "name": "10-team_profile_generator",
   "version": "1.0.0",
-  "description": "\"Team Profile Generator\"",
+  "description": "This is the challenge for Unit 10",
   "main": "index.js",
   "directories": {
     "lib": "lib",
-    "test": "./node_module/.bin/jest"
+    "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/CanRo2B/10-Team_Profile_Generator#readme",
   "dependencies": {
-    "inquirer": "^8.2.2"
+    "fs": "^0.0.1-security",
+    "inquirer": "^8.2.2",
+    "jest": "^27.5.1"
   }
 }

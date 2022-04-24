@@ -1,11 +1,13 @@
 // Require the employee from the lib folder
+const { number } = require("yargs");
 const Employee = require("../lib/employee");
+
+const e = new Employee("name", 522, "email@email.com")
 
 // Test can begin employee instance
 describe("Employee", () => {
     it("Begin the instance of employee", () => {
         const e = new Employee();
-        // expect(new Employee(e)).toBe("object");
         expect(typeof(e)).toBe("object");
     });
     
@@ -19,7 +21,7 @@ describe("Employee", () => {
 // Can set id via constructor args
     it("Will set an ID with the constructor arguments", () => {
         const idNumber = 522;
-        const e = new Employee();
+        const e = new Employee("Rocket", idNumber);
         expect(e.id).toBe(idNumber);
     });
 
@@ -27,7 +29,7 @@ describe("Employee", () => {
     it("Will set an email with the constructor arguments", () => {
         const emailCheck = "email@email.com";
         const e = new Employee("Rocket", 522, emailCheck);
-        expect(e.emailCheck).toBe(emailCheck);
+        expect(e.email).toBe(emailCheck);
     });
 
 // can set id via constructor function
@@ -35,7 +37,7 @@ describe("getId", () =>{
     it("Can get ID from the getID function", () => {
         const idNumber = 522;
         const e = new Employee("Rocket", idNumber);
-        expect(e.getID()).toBe(idNumber);
+        expect(e.getId()).toBe(idNumber);
     });
 });
 
