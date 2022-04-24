@@ -1,7 +1,6 @@
 const Manager = require("../lib/manager");
 // const Employee = require("../lib/employee");
 
-// const e = new Manager("Rickey", 1, "email@email.com", 100, "Manager")
 // can set office number from function  
 describe("getOffice", () => {
     it("Can get an office number from getOffice()", () =>{
