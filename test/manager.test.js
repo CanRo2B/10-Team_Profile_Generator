@@ -1,5 +1,5 @@
 const Manager = require("../lib/manager");
-const Employee = require("../lib/employee");
+
 
 // can set office number from function  
 describe("getOffice", () => {
@@ -16,7 +16,7 @@ describe("getOffice", () => {
         expect(e.officeNumber).toBe(officeNumber);
     });
 
-// role returns manager
+// Role returns Manager
 describe("getRole", () => {
     it("Can get Office Manager getRole function", () => {
         const manager = "Manager";
