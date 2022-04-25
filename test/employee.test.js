@@ -12,9 +12,9 @@ describe("Employee", () => {
     
 // Test can set name via constructor args
     it("Can set a name with the constructor arguments", () => {
-        const userName = "Rocket";
-        const e = new Employee(userName);
-        expect(e.userName).toBe(userName);
+        const username = "Rocket";
+        const e = new Employee(username);
+        expect(e.username).toBe(username);
     });
 
 // Can set id via constructor args
@@ -33,9 +33,9 @@ describe("Employee", () => {
 // can set userName via constructor function
 describe("getName", () => {
     it("Can get name from the getName function", () => {
-        const userName = "Rocket";
+        const username = "Rocket";
         const e = new Employee("Rocket");
-        expect(e.getName()).toBe(userName);
+        expect(e.getName()).toBe(username);
     });
 });
 
