@@ -4,114 +4,85 @@ const Intern = require("./lib/intern");
 const Engineer = require("./lib/engineer");
 const Manager = require("./lib/manager");
 
-const Employees = [];
 
-function addEmployees(){
- inquirer
- .prompt([
-    {
+const employees = [];
+
+function init() {
+    startDoc();
+    addEmployees();
+}
+
+function addEmployees() {
+ inquirer.prompt([
+        {
+        type: "input",
+        name: "userName",
+        message: "What is the team member name?",
+        },  
+        {
         type: "list",
         name: "role",
         message: "What is the team member role on the Team?",
         choices: ["Manager", "Engineer", "Intern"]
-    }, {
-        type: "input",
-        name: "name",
-        message: "What is the team member name?",
-    }, {
+        }, 
+        {
         type: "input",
         name: "id",
         message: "What is the team member ID?",
-    }, {
+        }, 
+        {
         type: "input",
         name: "email",
         message: "What is the team member email address?",
-    }, 
- ])
- .then (function addEmployees() {
-    let getInfo = " ";
-        if (role === "Manager"){
-            getInfo = "office number";
-            return  `<div class="col-4 mt-4">
-            <div class="card h-100">
-                <div class="card-header">
-                    <h3>${data.name}</h3>
-                    <h4>${data.role}</h4>
-                    <span class="material-symbols-outlined">
-                    supervisor_account
-                    </span>
-                </div>
-                <div class="card-body">
-                    <p class="id">ID: ${data.id}</p>
-                    <p class="email">Email: <a href="mailto:${data.email}">${data.email}</a></p>
-                    <p class="officeNumber">Office Number: ${manager.officeNumber}</p>
-                </div>
-            </div>
-        </div>
-        `  ; 
-        } 
-         else if (role === "Engineer") {
-            getInfo = "Github Username";
-            return `<div class="col-4 mt-4">
-            <div class="card h-100">
-                <div class="card-header">
-                    <h3>${data.name}</h3>
-                    <h4>${data.role}</h4>
-                    <span class="material-symbols-outlined">
-                    supervisor_account
-                    </span>
-                </div>
-                <div class="card-body">
-                    <p class="id">ID: ${data.id}</p>
-                    <p class="email">Email: <a href="mailto:${data.email}">${data.email}</a></p>
-                    <p class="githubName">GitHub: ${engineer.githubName}</p>
-                </div>
-            </div>
-        </div>`
-        }  else  {
-           getInfo = "school";
-           return`<div class="col-4 mt-4">
-             <div class="card h-100">
-               <div class="card-header">
-                   <h3>${data.name}</h3>
-                   <h4>${data.role}</h4>
-                   <span class="material-symbols-outlined">
-                   supervisor_account
-                   </span>
-               </div>
-               <div class="card-body">
-                   <p class="id">ID: ${data.id}</p>
-                   <p class="email">Email: <a href="mailto:${data.email}">${data.email}</a></p>
-                   <p class="school">School: ${intern.school}</p>
-               </div>
-           </div>
-       </div>`
-           }  
-        })
-}
-    .then (function moreEmployees() => {
+        }])
+        .then(function({userName, role, id, email}) {
+        let getInfo = "";
+            if (role === "Manager") {
+                getInfo = "office number";
+            } 
+            else if (role === "Engineer") {
+                getInfo = "Github Username";
+            }  else  {
+                getInfo = "school";
+            }  
         inquirer.prompt([
             {
             type: "input",
-            name = "getInfo",
+            name: "getInfo",
             message: `Enter your ${getInfo}`,
-           },
-        {
+           }, {
             type: "list",
             name: "inquireMore",
             message: "Would you like to add more Team Members?",
             choices: ["Yes", "No"],
+            }
+        ])
+    })  
+    .then(function({getInfo, inquireMore}){
+        let newEmployees;
+        if(role === "Manger") {
+            newEmployees = new Manager(userName, id, email, getInfo); 
+        } else if (role === "Engineer") {
+            newEmployees = new Engineer(userName, id, email, getInfo);
+        } else {
+            newEmployees = new Intern(userName, id, email, getInfo);
         }
-            if (inquireMore === "Yes") {
+        employees.push(newEmployees);
+        addFile(newEmployees)
+        .then(function(){
+            if(inquireMore === "Yes") {
                 addEmployees();
             } else {
                 endDoc();
             }
-        ])
-    })  
-    
-    .then((data) => {
-     let datainfo = 
+        });
+    });
+};
+
+
+
+function startDoc() {
+    const dataInfo = 
      `<!DOCTYPE html>
      <html lang="en">
      <head>
@@ -130,22 +101,91 @@ function addEmployees(){
          </header>
          <main>
             <section class="container">
-                <div class="row">
-                    <div>${data.addEmployees()}</div>
-                </div>
-            </section>
-         `
-        .then (function endDoc() => {
-            let endInfo = 
-                    `</main>
-                </body>
-            </html>`
-        })
+                <div class="row">`;
+    fs.writeFile("data.html", dataInfo, (err) =>
+        err ? console.log(err) : console.log("Team Profile created."));
+}
 
-     fs.writeFile('data.html', datainfo, (err) =>
-     err ? console.log(err) : console.log("Team Profile created."));
- });
-};
+function getCards(employee) {
+    return new Promise(function(resolve, reject){
+        const userName = employee.getName();
+        const role = employee.getRole();
+        const id = employee.getID();
+        const email = employee.getEmail();
+        let data = "";
+        if (role === "Engineer") {
+            const githubName = employee.getgithubName();
+            data =    `<div class="col-4 mt-4">
+                 <div class="card h-100">
+                     <div class="card-header">
+                         <h3>${employee.name}</h3>
+                         <h4>${employee.role}</h4>
+                         <span class="material-symbols-outlined">
+                         supervisor_account
+                         </span>
+                     </div>
+                     <div class="card-body">
+                         <p class="id">ID: ${employee.id}</p>
+                         <p class="email">Email: <a href="mailto:${employee.email}">${employee.email}</a></p>
+                         <p class="githubName">GitHub: ${engineer.githubName}</p>
+                     </div>
+                 </div>
+             </div>`
+        } else if (role === "Intern") {
+            const school = employee.getSchool();
+            data = `<div class="col-4 mt-4">
+                <div class="card h-100">
+                     <div class="card-header">
+                    <h3>${employee.name}</h3>
+                         <h4>${employee.role}</h4>
+                        <span class="material-symbols-outlined">
+                         supervisor_account
+                         </span>
+                     </div>
+                     <div class="card-body">
+                         <p class="id">ID: ${employee.id}</p>
+                         <p class="email">Email: <a href="mailto:${employee.email}">${employee.email}</a></p>
+                         <p class="school">School: ${intern.school}</p>
+                     </div>
+                 </div>
+             </div>`
+        } else {
+            const officeNumber = employee.getOffice();
+            data =  `<div class="col-4 mt-4">
+                         <div class="card h-100">
+                             <div class="card-header">
+                                 <h3>${employee.name}</h3>
+                                 <h4>${employee.role}</h4>
+                                 <span class="material-symbols-outlined">
+                                 supervisor_account
+                                 </span>
+                             </div>
+                             <div class="card-body">
+                                 <p class="id">ID: ${employee.id}</p>
+                               <p class="email">Email: <a href="mailto:${employee.email}">${employee.email}</a></p>
+                              <p class="officeNumber">Office Number: ${manager.officeNumber}</p>
+                             </div>
+                         </div>
+                     </div>
+                    `
+        }
+        console.log("Add Team Member Profile Card");
+        fs.appendFile("data.html", dataInfo, (err) =>
+        err ? console.log(err) : console.log("Added Cards"));
+
+    });
+}
+    
+function endDoc(){
+    const end = `</div>
+        </div>
+        </body>
+    </html>`
+    fs.appendFile("data.html", dataInfo, (err) =>
+    err ? console.log(err) : console.log("Team Profile created."));
+}
+ 
+init();
 
 // Create Manager card
     //  const createManager = function(manager) {
@@ -207,9 +247,6 @@ function addEmployees(){
     //         </div>
     //     </div>
     // </div>`
-    }
-    }
-     }
     //   
     //     .then(function Confirm() => {
     //             if "yes" = function newEmployees(){
