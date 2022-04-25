@@ -66,7 +66,7 @@ function addEmployees() {
             newEmployees = new Intern(username, id, email, getInfo);
         }
         employees.push(newEmployees);
-        addFile(newEmployees)
+        getCards(newEmployees)
         .then(function(){
             if(inquireMore === "Yes") {
                 addEmployees();
@@ -114,7 +114,7 @@ function getCards(employee) {
     return new Promise(function(resolve, reject) {
         const username = employee.getName();
         const role = employee.getRole();
-        const id = employee.getID();
+        const id = employee.getId();
         const email = employee.getEmail();
         let data = "";
         if (role === "Manager") {
@@ -180,7 +180,7 @@ function getCards(employee) {
                      reject(err);
                      return;
                 };
-                return resolve(result);
+                return resolve();
                 
             });
     });
@@ -192,7 +192,7 @@ function endDoc(){
         </div>
         </body>
     </html>`;
-    fs.appendFile("data.html", dataInfo, (err) =>
+    fs.appendFile("data.html", end, (err) =>
     err ? console.log(err) : console.log("Team Profile created."));
 }
  
