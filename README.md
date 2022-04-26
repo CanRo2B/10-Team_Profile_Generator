@@ -18,10 +18,10 @@ This project was to use Node.js to create a formatted Team Profile.  Each employ
 To run this project, open up the Integrated Terminal.  You can run the npm test to run all four test for the different types of Employees.  Then you can type node index.js to start the Team Profile Generator.  Answer the series of questions, then note different employee inputs that will be added.  The questions of name, email and id will be the same for all employees.  A Manager will be asked for an office number.  An Engineer will be asked for their GitHub username, and the Intern is asked what school they attend.  If there are no more employees to add, the Team Profile is then generated in the file data.html.  
 
 ## Screenshot
-![Screenshot of Project]()
+![Screenshot of Project](Assets/screencapture-file-Users-candacerobbins-Documents-UCF-Homework-10-Team-Profile-Generator-data-html-2022-04-25-23_41_19.png)
 
 ## Video Link
-[Video Link]()
+[Video Link](https://drive.google.com/file/d/1ZwAcuBzb0LfIBUHPa3vHM3f6k6M7RQZi/view)
 
 ## Credits
 I used several of the in class modules to help me with this project.  I even found a couple people on GitHub that had similar projects that I checked my work.  
