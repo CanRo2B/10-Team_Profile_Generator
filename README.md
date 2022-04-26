@@ -21,7 +21,7 @@ To run this project, open up the Integrated Terminal.  You can run the npm test 
 ![Screenshot of Project](Assets/screencapture-file-Users-candacerobbins-Documents-UCF-Homework-10-Team-Profile-Generator-data-html-2022-04-25-23_41_19.png)
 
 ## Video Link
-[Video Link](https://drive.google.com/file/d/1ZwAcuBzb0LfIBUHPa3vHM3f6k6M7RQZi/view)
+[Video Link](https://drive.google.com/file/d/1XfhLDkw_jLGnde1emWMpjPMaD4X6Wi3u/view?usp=sharing)
 
 ## Credits
 I used several of the in class modules to help me with this project.  I even found a couple people on GitHub that had similar projects that I checked my work.  
